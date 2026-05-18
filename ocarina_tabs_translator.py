@@ -38,16 +38,19 @@ def translated_notes(notes):
     
     translated_notes_list = []
     for list_notes in notes:
+        line = []
+        translated_notes_list.append(line)
         for note in list_notes:
-            translated_notes_list.append(TRANSLATOR.get(note, note))
+            line.append(TRANSLATOR.get(note, note))
 
     return translated_notes_list
 
 def create_translated_archive(notes, untranslated_archive):
 
-    translated_archive = untranslated_archive[:-3] + 'o'
+    translated_archive = untranslated_archive[:-3] + 'oc'
     with open(translated_archive, 'w') as archive:
-        print(*notes, sep=' ', file=archive)
+            for line in notes:
+                print(*line, sep=' ', file=archive)
 
 def main():
     
