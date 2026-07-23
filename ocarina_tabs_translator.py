@@ -1,3 +1,5 @@
+from pathlib import Path
+
 TRANSLATOR = {
     "A4" : "A",
     "A#4" : "B",
@@ -12,7 +14,7 @@ TRANSLATOR = {
     "G5" : "K",
     "G#5" : "L",
     "A5" : "M",
-    "A#6" : "N",
+    "A#5" : "N",
     "B5" : "O",
     "C6" : "P",
     "C#6" : "Q",
@@ -46,14 +48,14 @@ def translated_notes(notes):
     return translated_notes_list
 
 def create_translated_archive(notes, untranslated_archive):
+    """creates a new text file containing the translated notes, inside the repository 'tabs', keeping the original name and with extension .oc"""
 
-    translated_archive = untranslated_archive[:-3] + 'oc'
+    translated_archive = Path("tabs") / Path(untranslated_archive).with_suffix(".oc").name
     with open(translated_archive, 'w') as archive:
             for line in notes:
-                print(*line, sep=' ', file=archive)
+                print(*line, sep='', file=archive)
 
 def main():
-    
     notes, archive_name = list_archive()
     notes_translated = translated_notes(notes)
     create_translated_archive(notes_translated, archive_name)
